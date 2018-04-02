@@ -1,7 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
-
+require '../vendor/autoload.php';
 
 $config = new \Mobly\LinxMicrovix\Writer\Configuration([
     'user' => 'linx_import',

@@ -14,5 +14,8 @@
       "email": "dev@mobly.com.br"
     }
   ],
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "require": {
+    "guzzlehttp/guzzle": "^6.3"
+  }
 }
