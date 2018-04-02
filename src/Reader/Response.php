@@ -27,12 +27,14 @@ class Response
 
     protected $data;
 
-
+    /**
+     * Response constructor.
+     * @param $result
+     */
     public function __construct($result)
     {
         $this->result = $result;
         $this->parseXml();
-
     }
 
     /**

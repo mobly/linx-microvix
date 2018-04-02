@@ -79,7 +79,6 @@ class Reader
         } catch (\Exception $e) {
             throw $e;
         }
-
     }
 
 }
