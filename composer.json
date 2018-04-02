@@ -7,9 +7,6 @@
       "Mobly\\LinxMicrovix\\": "src"
     }
   },
-  "require": {
-    "psr/cache": "1.0.0"
-  },
   "license": "proprietary",
   "authors": [
     {
