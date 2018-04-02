@@ -1,0 +1,21 @@
+{
+  "name": "mobly/linx-microvix",
+  "description": "Linx Microvix SDK",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Mobly\\LinxMicrovix\\": "src"
+    }
+  },
+  "require": {
+    "psr/cache": "1.0.0"
+  },
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Mobly Developers",
+      "email": "dev@mobly.com.br"
+    }
+  ],
+  "minimum-stability": "stable"
+}
