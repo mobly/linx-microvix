@@ -4,6 +4,7 @@ namespace Mobly\LinxMicrovix;
 
 use GuzzleHttp\Client;
 use Mobly\LinxMicrovix\Reader\Configuration;
+use Mobly\LinxMicrovix\Reader\Factories\AbstractRequestFactory;
 use Mobly\LinxMicrovix\Reader\Factories\RequestFactory;
 use Mobly\LinxMicrovix\Reader\Response;
 
@@ -13,6 +14,11 @@ use Mobly\LinxMicrovix\Reader\Response;
  */
 class Reader
 {
+
+    const REQUEST_MAPPING = [
+        'LinxVendedores' => 'Mobly\LinxMicrovix\Reader\Factories\SellerFactory',
+    ];
+
     /**
      * @var Configuration
      */
@@ -53,13 +59,23 @@ class Reader
 
     /**
      * @param $command
+     * @param array $customFilters
      * @return Response
      * @throws \Exception
      */
-    public function get($command)
+    public function get($command, $customFilters = [])
     {
-        $requestFactory = new RequestFactory($this->configuration);
-        $xml = $requestFactory->build($command);
+        if (!array_key_exists($command, self::REQUEST_MAPPING)) {
+            throw new \Exception('Command not mapped');
+        }
+
+        $class = self::REQUEST_MAPPING[$command];
+
+        /**
+         * @var AbstractRequestFactory $requestFactory
+         */
+        $requestFactory = new $class($this->configuration);
+        $xml = $requestFactory->build($command, $customFilters);
 
         try {
             $response = $this->client->request(

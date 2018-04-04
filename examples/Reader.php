@@ -6,15 +6,15 @@ $config = new \Mobly\LinxMicrovix\Reader\Configuration([
     'user' => 'linx_export',
     'password' => 'linx_export',
     'cnpj' => '25557193000107',
-    'keyPortal' => 'CC59D806-A447-45EB-A1CD-E3B4CAE21BCF',
-    'url' => 'http://webapi.microvix.com.br/1.0/api/integracao'
+    'keyPortal' => '51509428-ba56-4f83-aa65-0023aa4ac507',
+    'url' => 'http://189.36.2.107:8728/1.0/api/integracao'
 ]);
 
 $reader = new \Mobly\LinxMicrovix\Reader($config);
 
 try {
-    $response = $reader->get('LinxProdutos');
-    print_r($response);
+    $response = $reader->get('LinxVendedores');
+    print_r($response->getData());
     echo 'OK' . PHP_EOL;
 
 } catch (\SoapFault $s) {

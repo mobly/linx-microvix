@@ -5,10 +5,10 @@ namespace Mobly\LinxMicrovix\Reader\Factories;
 use Mobly\LinxMicrovix\Reader\Configuration;
 
 /**
- * Class RequestFactory
+ * Class AbstractRequestFactory
  * @package Mobly\LinxMicrovix\Reader\Factories
  */
-class RequestFactory
+abstract class AbstractRequestFactory
 {
     /**
      * @var Configuration
@@ -43,7 +43,7 @@ class RequestFactory
      * @param \SimpleXMLElement $commandNode
      * @return \SimpleXMLElement
      */
-    protected function setParametersCommand(\SimpleXMLElement $commandNode)
+    protected function addDefaultParametersCommand(\SimpleXMLElement $commandNode)
     {
         $parametersNode = $commandNode->addChild('Parameters');
         $keyParameter = $parametersNode->addChild('Parameter', $this->configuration->getKeyPortal());
@@ -51,21 +51,22 @@ class RequestFactory
 
         $cnpjEmpParameter = $parametersNode->addChild('Parameter', $this->configuration->getCnpj());
         $cnpjEmpParameter->addAttribute('id', 'cnpjEmp');
+
+        return $parametersNode;
     }
 
     /**
      * @param $command
+     * @param array $arrayFilter
      * @return mixed
      */
-    public function build($command)
-    {
-        $commandNode = $this->requestXML->addChild('Command');
-        $commandNode->addChild('Name', $command);
+    abstract public function build($command, $arrayFilter = []);
 
-        $this->setParametersCommand($commandNode);
-
-        return $this->requestXML->asXML();
-    }
-
+    /**
+     * @param \SimpleXMLElement $commandNode
+     * @param array $customFilters
+     * @return mixed
+     */
+    abstract protected function addCustomFilters(\SimpleXMLElement $commandNode, array $customFilters);
 
 }

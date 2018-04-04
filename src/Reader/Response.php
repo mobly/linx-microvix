@@ -2,6 +2,8 @@
 
 namespace Mobly\LinxMicrovix\Reader;
 
+use Mobly\LinxMicrovix\Reader\Response\ParseResult;
+
 /**
  * Class Configuration
  * @package Mobly\LinxMicrovix\Reader
@@ -24,8 +26,15 @@ class Response
      */
     protected $result;
 
-
+    /**
+     * @var array
+     */
     protected $data;
+
+    /**
+     * @var ParseResult
+     */
+    protected $parseResult;
 
     /**
      * Response constructor.
@@ -33,6 +42,7 @@ class Response
      */
     public function __construct($result)
     {
+        $this->parseResult = new ParseResult();
         $this->result = $result;
         $this->parseXml();
     }
@@ -61,10 +71,11 @@ class Response
                 return true;
             }
 
+            $this->data = $this->parseResult->parse($result->ResponseData);
+
         } catch (\Exception $e) {
             $this->addError($e->getMessage());
         }
-
     }
 
     /**
@@ -84,4 +95,11 @@ class Response
         return $this->success;
     }
 
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
 }
