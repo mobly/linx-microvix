@@ -13,8 +13,12 @@ $config = new \Mobly\LinxMicrovix\Reader\Configuration([
 $reader = new \Mobly\LinxMicrovix\Reader($config);
 
 try {
-    $response = $reader->get('LinxVendedores');
-    print_r($response->getData());
+    $responseSellers = $reader->get('LinxVendedores');
+    print_r($responseSellers->getData());
+
+
+    $responseProducts = $reader->get('LinxProdutosDetalhes');
+    print_r($responseProducts->getData());
     echo 'OK' . PHP_EOL;
 
 } catch (\SoapFault $s) {

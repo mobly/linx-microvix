@@ -21,6 +21,11 @@ abstract class AbstractRequestFactory
     protected $requestXML;
 
     /**
+     * @var array
+     */
+    protected $searchFields = [];
+
+    /**
      * RequestFactory constructor.
      * @param Configuration $configuration
      */
@@ -60,13 +65,35 @@ abstract class AbstractRequestFactory
      * @param array $arrayFilter
      * @return mixed
      */
-    abstract public function build($command, $arrayFilter = []);
+    public function build($command, $arrayFilter = [])
+    {
+        $commandNode = $this->requestXML->addChild('Command');
+        $commandNode->addChild('Name', $command);
+
+        $parametersNode = $this->addDefaultParametersCommand($commandNode);
+        $this->addCustomFilters($parametersNode, $arrayFilter);
+
+        return $this->requestXML->asXML();
+    }
 
     /**
-     * @param \SimpleXMLElement $commandNode
+     * @param \SimpleXMLElement $parametersNode
      * @param array $customFilters
-     * @return mixed
+     * @return bool
      */
-    abstract protected function addCustomFilters(\SimpleXMLElement $commandNode, array $customFilters);
+    protected function addCustomFilters(\SimpleXMLElement $parametersNode, array $customFilters)
+    {
+        $filters = array_merge($this->searchFields, $customFilters);
+        foreach ($filters as $key => $value) {
+            if (!array_key_exists($key, $this->searchFields)) {
+                continue;
+            }
+
+            $parameter = $parametersNode->addChild('Parameter', $value);
+            $parameter->addAttribute('id', $key);
+        }
+
+        return true;
+    }
 
 }
