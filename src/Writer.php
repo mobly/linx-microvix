@@ -4,9 +4,9 @@ namespace Mobly\LinxMicrovix;
 
 use Mobly\LinxMicrovix\Writer\Configuration;
 use Mobly\LinxMicrovix\Writer\Entities\Import;
+use Mobly\LinxMicrovix\Writer\Entities\ImportResponse;
 use Mobly\LinxMicrovix\Writer\Factories\RequestFactory;
 use Mobly\LinxMicrovix\Writer\Services\Importer;
-use Mobly\LinxMicrovix\Writer\Services\ImporterResponse;
 
 /**
  * Class Writer
@@ -47,7 +47,7 @@ class Writer
 
     /**
      * @param array $data
-     * @return ImporterResponse
+     * @return ImportResponse
      */
     public function send(array $data)
     {
