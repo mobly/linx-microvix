@@ -65,12 +65,13 @@ class Configuration
      */
     protected function setWsdlPath()
     {
+        $baseDir = __DIR__ . '/../../wsdl/';
         if ($this->sandBox) {
-            $this->wsdlPath = 'wsdl/Importador_sandbox.svc.xml';
+            $this->wsdlPath = $baseDir . 'Importador_sandbox.svc.xml';
             return true;
         }
 
-        $this->wsdlPath = 'wsdl/Importador.svc.xml';
+        $this->wsdlPath = $baseDir . 'wsdl/Importador.svc.xml';
     }
 
     /**
