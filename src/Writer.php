@@ -42,7 +42,9 @@ class Writer
     {
         $this->configuration = $configuration;
         $this->requestFactory = new RequestFactory($configuration);
-        $this->importer = new Importer($configuration->getWsdlPath());
+
+        $options = ["connection_timeout" => 15];
+        $this->importer = new Importer($configuration->getWsdlPath(), $options);
     }
 
     /**

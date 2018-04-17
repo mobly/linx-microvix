@@ -83,6 +83,7 @@ class Reader
                 'POST',
                 $this->getConfiguration()->getUrl(),
                 [
+                    'connect_timeout' => 10,
                     'headers' => [
                         'Content-Type' => 'text/xml',
                     ],
