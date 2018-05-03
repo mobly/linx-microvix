@@ -30,14 +30,9 @@ class Configuration
     protected $keyPortal;
 
     /**
-     * @var boolean
-     */
-    protected $sandBox;
-
-    /**
      * @var string
      */
-    protected $wsdlPath;
+    protected $wsdlUrl;
 
     /**
      * @var array
@@ -50,28 +45,11 @@ class Configuration
     /**
      * Configuration constructor.
      * @param array $options
-     * @param bool $sandbox
      */
-    public function __construct(array $options, $sandbox = true)
+    public function __construct(array $options)
     {
-        $this->sandBox = $sandbox;
-        $this->setWsdlPath();
         $this->validateRequired($options);
         $this->setData($options);
-    }
-
-    /**
-     * @return bool
-     */
-    protected function setWsdlPath()
-    {
-        $baseDir = __DIR__ . '/../../wsdl/';
-        if ($this->sandBox) {
-            $this->wsdlPath = $baseDir . 'Importador_sandbox.svc.xml';
-            return true;
-        }
-
-        $this->wsdlPath = $baseDir . 'wsdl/Importador.svc.xml';
     }
 
     /**
@@ -177,29 +155,20 @@ class Configuration
     }
 
     /**
-     * @return boolean
-     */
-    public function isSandBox()
-    {
-        return $this->sandBox;
-    }
-
-    /**
-     * @param boolean $sandBox
-     * @return Configuration
-     */
-    public function setSandBox($sandBox)
-    {
-        $this->sandBox = $sandBox;
-        return $this;
-    }
-
-    /**
      * @return string
      */
-    public function getWsdlPath()
+    public function getWsdlUrl()
     {
-        return $this->wsdlPath;
+        return $this->wsdlUrl;
     }
 
+    /**
+     * @param string $wsdlUrl
+     * @return Configuration
+     */
+    public function setWsdlUrl($wsdlUrl)
+    {
+        $this->wsdlUrl = $wsdlUrl;
+        return $this;
+    }
 }

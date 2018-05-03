@@ -16,14 +16,15 @@ class Importer extends \SoapClient
      * @access private
      */
     private static $classmap = array(
-      'Importar' => '\Import',
-      'ImportarResponse' => '\Mobly\LinxMicrovix\Writer\Entities\ImportResponse',
-      'Request' => '\Request',
-      'Registros' => '\Registros',
-      'CommandParameter' => '\CommandParameter',
-      'Tabela' => '\Table',
-      'UserAuthentication' => '\UserAuthentication',
-      'RetornoImportacao' => '\Mobly\LinxMicrovix\Writer\Services\ImporterResponse');
+        'Importar' => '\Import',
+        'ImportarResponse' => '\Mobly\LinxMicrovix\Writer\Entities\ImportResponse',
+        'Request' => '\Request',
+        'Registros' => '\Registros',
+        'CommandParameter' => '\CommandParameter',
+        'Tabela' => '\Table',
+        'UserAuthentication' => '\UserAuthentication',
+        'RetornoImportacao' => '\Mobly\LinxMicrovix\Writer\Services\ImporterResponse'
+    );
 
     /**
      * @param array $options A array of config values
@@ -32,13 +33,13 @@ class Importer extends \SoapClient
      */
     public function __construct($wsdl, array $options = array())
     {
-      foreach (self::$classmap as $key => $value) {
-        if (!isset($options['classmap'][$key])) {
-          $options['classmap'][$key] = $value;
+        foreach (self::$classmap as $key => $value) {
+            if (!isset($options['classmap'][$key])) {
+              $options['classmap'][$key] = $value;
+            }
         }
-      }
-      
-      parent::__construct($wsdl, $options);
+
+        parent::__construct($wsdl, $options);
     }
 
     /**
@@ -47,7 +48,6 @@ class Importer extends \SoapClient
      */
     public function import(Import $parameters)
     {
-      return $this->__soapCall('Importar', array($parameters));
+        return $this->__soapCall('Importar', array($parameters));
     }
-
 }
