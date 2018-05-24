@@ -7,12 +7,20 @@ $config = new \Mobly\LinxMicrovix\Reader\Configuration([
     'password' => 'linx_export',
     'cnpj' => '25557193000107',
     'keyPortal' => '51509428-ba56-4f83-aa65-0023aa4ac507',
-    'url' => 'http://189.36.2.107:8728/1.0/api/integracao'
+    'url' => 'http://aceitacao.microvix.com.br:8728/1.0/api/integracao'
 ]);
 
 $reader = new \Mobly\LinxMicrovix\Reader($config);
 
 try {
+    $responseOrders = $reader->get('LinxPedidosVenda', [
+        'cnpjEmp' => '25557193000107',
+        'data_fim' => '2018-05-30T11:40:30',
+        'data_inicial' => '2018-05-17T11:22:30'
+    ]);
+
+    print_r($responseOrders->getData());
+
     $responseSellers = $reader->get('LinxVendedores');
     print_r($responseSellers->getData());
 

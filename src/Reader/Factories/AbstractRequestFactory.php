@@ -51,13 +51,24 @@ abstract class AbstractRequestFactory
     protected function addDefaultParametersCommand(\SimpleXMLElement $commandNode)
     {
         $parametersNode = $commandNode->addChild('Parameters');
-        $keyParameter = $parametersNode->addChild('Parameter', $this->configuration->getKeyPortal());
-        $keyParameter->addAttribute('id', 'chave');
+        $this->addIdParameter($parametersNode);
 
         $cnpjEmpParameter = $parametersNode->addChild('Parameter', $this->configuration->getCnpj());
         $cnpjEmpParameter->addAttribute('id', 'cnpjEmp');
 
         return $parametersNode;
+    }
+
+    /**
+     * @param \SimpleXMLElement $parametersNode
+     * @return bool
+     */
+    protected function addIdParameter(\SimpleXMLElement $parametersNode)
+    {
+        $keyParameter = $parametersNode->addChild('Parameter', $this->configuration->getKeyPortal());
+        $keyParameter->addAttribute('id', 'chave');
+
+        return true;
     }
 
     /**
