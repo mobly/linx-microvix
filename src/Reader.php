@@ -18,6 +18,7 @@ class Reader
     const REQUEST_MAPPING = [
         'LinxVendedores' => 'Mobly\LinxMicrovix\Reader\Factories\SellerFactory',
         'LinxProdutosDetalhes' => 'Mobly\LinxMicrovix\Reader\Factories\ProductDetailFactory',
+        'LinxClientesFornec' => 'Mobly\LinxMicrovix\Reader\Factories\CustomerFactory',
     ];
 
     /**
