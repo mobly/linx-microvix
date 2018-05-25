@@ -19,6 +19,7 @@ class Reader
         'LinxVendedores' => 'Mobly\LinxMicrovix\Reader\Factories\SellerFactory',
         'LinxProdutosDetalhes' => 'Mobly\LinxMicrovix\Reader\Factories\ProductDetailFactory',
         'LinxClientesFornec' => 'Mobly\LinxMicrovix\Reader\Factories\CustomerFactory',
+        'LinxPedidosVenda' => 'Mobly\LinxMicrovix\Reader\Factories\GetOrdersFactory',
         'LinxProdutos' => 'Mobly\LinxMicrovix\Reader\Factories\ProductFactory',
     ];
 
