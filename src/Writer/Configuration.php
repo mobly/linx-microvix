@@ -35,6 +35,11 @@ class Configuration
     protected $wsdlUrl;
 
     /**
+     * @var
+     */
+    protected $cnpjEmp;
+
+    /**
      * @var array
      */
     protected $required = [
@@ -169,6 +174,24 @@ class Configuration
     public function setWsdlUrl($wsdlUrl)
     {
         $this->wsdlUrl = $wsdlUrl;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCnpjEmp()
+    {
+        return $this->cnpjEmp;
+    }
+
+    /**
+     * @param mixed $cnpjEmp
+     * @return Configuration
+     */
+    public function setCnpjEmp($cnpjEmp)
+    {
+        $this->cnpjEmp = $cnpjEmp;
         return $this;
     }
 }

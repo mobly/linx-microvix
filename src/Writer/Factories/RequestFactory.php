@@ -52,6 +52,7 @@ class RequestFactory
 
         $document = new CommandParameter();
         $document->setName('cnpjEmp');
+        $document->setValue($this->configuration->getCnpjEmp());
 
         $this->requestParameters[] = $portal;
         $this->requestParameters[] = $key;
