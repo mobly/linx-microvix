@@ -37,13 +37,21 @@ class Response
     protected $parseResult;
 
     /**
+     * @var string
+     */
+    protected $xmlRequest;
+
+    /**
      * Response constructor.
      * @param $result
+     * @param $xmlRequest
      */
-    public function __construct($result)
+    public function __construct($result, $xmlRequest)
     {
         $this->parseResult = new ParseResult();
         $this->result = $result;
+        $this->xmlRequest = $xmlRequest;
+
         $this->parseXml();
     }
 
@@ -102,4 +110,23 @@ class Response
     {
         return $this->data;
     }
+
+    /**
+     * @return string
+     */
+    public function getXmlRequest()
+    {
+        return $this->xmlRequest;
+    }
+
+    /**
+     * @param string $xmlRequest
+     * @return Response
+     */
+    public function setXmlRequest($xmlRequest)
+    {
+        $this->xmlRequest = $xmlRequest;
+        return $this;
+    }
+
 }

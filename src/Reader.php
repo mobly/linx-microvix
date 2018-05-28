@@ -95,7 +95,7 @@ class Reader
 
             $result = $response->getBody()->getContents();
 
-            return new Response($result);
+            return new Response($result, $xml);
         } catch (\Exception $e) {
             throw $e;
         }
