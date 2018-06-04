@@ -7,6 +7,7 @@ use Mobly\LinxMicrovix\Writer\Entities\Import;
 use Mobly\LinxMicrovix\Writer\Entities\ImportResponse;
 use Mobly\LinxMicrovix\Writer\Factories\RequestFactory;
 use Mobly\LinxMicrovix\Writer\Services\Importer;
+use Mobly\LinxMicrovix\Writer\Services\ImporterResponse;
 
 /**
  * Class Writer
@@ -54,13 +55,20 @@ class Writer
      */
     public function send(array $data)
     {
-        $request = $this->requestFactory->build($this->getTable(), $data);
-        $importRequest = new Import($request);
+        try {
+            $request = $this->requestFactory->build($this->getTable(), $data);
+            $importRequest = new Import($request);
 
-        $response = $this->importer->import($importRequest);
+            $response = $this->importer->import($importRequest);
 
-        if ($response instanceof LastRequestInterface) {
+            if ($response instanceof LastRequestInterface) {
+                $response->setLastRequest($this->importer->__getLastRequest());
+            }
+
+        } catch (\SoapFault $e) {
+            $response = new ImporterResponse(false);
             $response->setLastRequest($this->importer->__getLastRequest());
+            $response->setMensagem($e->getMessage());
         }
 
         return $response;
