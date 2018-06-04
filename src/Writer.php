@@ -43,7 +43,8 @@ class Writer
         $this->configuration = $configuration;
         $this->requestFactory = new RequestFactory($configuration);
 
-        $options = ["connection_timeout" => 15];
+        $options = ["connection_timeout" => 15, 'trace' => 1];
+
         $this->importer = new Importer($configuration->getWsdlUrl(), $options);
     }
 
@@ -56,7 +57,13 @@ class Writer
         $request = $this->requestFactory->build($this->getTable(), $data);
         $importRequest = new Import($request);
 
-        return $this->importer->import($importRequest);
+        $response = $this->importer->import($importRequest);
+
+        if ($response instanceof LastRequestInterface) {
+            $response->setLastRequest($this->importer->__getLastRequest());
+        }
+
+        return $response;
     }
 
     /**

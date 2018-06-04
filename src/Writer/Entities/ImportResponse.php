@@ -2,13 +2,14 @@
 
 namespace Mobly\LinxMicrovix\Writer\Entities;
 
+use Mobly\LinxMicrovix\LastRequestInterface;
 use Mobly\LinxMicrovix\Writer\Services\ImporterResponse;
 
 /**
  * Class ImportResponse
  * @package Mobly\LinxMicrovix\Writer\Entities
  */
-class ImportResponse
+class ImportResponse implements LastRequestInterface
 {
 
     /**
@@ -16,6 +17,11 @@ class ImportResponse
      * @access public
      */
     protected $ImportarResult = null;
+
+    /**
+     * @var
+     */
+    protected $lastRequest;
 
     /**
      * @param ImporterResponse $ImportarResult
@@ -44,4 +50,21 @@ class ImportResponse
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLastRequest()
+    {
+        return $this->lastRequest;
+    }
+
+    /**
+     * @param mixed $lastRequest
+     * @return ImportResponse
+     */
+    public function setLastRequest($lastRequest)
+    {
+        $this->lastRequest = $lastRequest;
+        return $this;
+    }
 }
