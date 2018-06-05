@@ -2,6 +2,7 @@
 
 namespace Mobly\LinxMicrovix\Writer\Services;
 
+use Mobly\LinxMicrovix\Exceptions\ConnectionTimeoutException;
 use Mobly\LinxMicrovix\Writer\Entities\Import;
 
 /**
@@ -39,6 +40,8 @@ class Importer extends \SoapClient
             }
         }
 
+        $this->ping($wsdl);
+
         parent::__construct($wsdl, $options);
     }
 
@@ -49,5 +52,25 @@ class Importer extends \SoapClient
     public function import(Import $parameters)
     {
         return $this->__soapCall('Importar', array($parameters));
+    }
+
+    /**
+     * @param $wsdl
+     * @throws ConnectionTimeoutException
+     */
+    private function ping($wsdl)
+    {
+        try {
+            file_get_contents(
+                $wsdl,
+                false,
+                stream_context_create(['http' => [
+                    'timeout' => 5,
+                ]])
+            );
+
+        } catch (\Exception $exception) {
+            throw new ConnectionTimeoutException();
+        }
     }
 }
