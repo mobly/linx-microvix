@@ -48,7 +48,6 @@ class Configuration
         'cnpj',
         'url',
         'keyPortal',
-        'idPortal'
     ];
 
     /**
