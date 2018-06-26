@@ -35,6 +35,11 @@ class Configuration
     protected $url;
 
     /**
+     * @var string
+     */
+    protected $idPortal;
+
+    /**
      * @var array
      */
     protected $required = [
@@ -42,7 +47,8 @@ class Configuration
         'password',
         'cnpj',
         'url',
-        'keyPortal'
+        'keyPortal',
+        'idPortal'
     ];
 
     /**
@@ -175,4 +181,21 @@ class Configuration
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getIdPortal()
+    {
+        return $this->idPortal;
+    }
+
+    /**
+     * @param string $idPortal
+     * @return Configuration
+     */
+    public function setIdPortal($idPortal)
+    {
+        $this->idPortal = $idPortal;
+        return $this;
+    }
 }

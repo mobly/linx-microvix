@@ -35,6 +35,7 @@ abstract class AbstractRequestFactory
 
         $this->requestXML = new \SimpleXMLElement("<LinxMicrovix></LinxMicrovix>");
         $this->setAuthentication();
+        $this->setPortal();
     }
 
     protected function setAuthentication()
@@ -42,6 +43,11 @@ abstract class AbstractRequestFactory
         $authenticationNode = $this->requestXML->addChild('Authentication');
         $authenticationNode->addAttribute('user', $this->configuration->getUser());
         $authenticationNode->addAttribute('password', $this->configuration->getPassword());
+    }
+
+    protected function setPortal()
+    {
+        $this->requestXML->addChild('IdPortal', $this->configuration->getIdPortal());
     }
 
     /**
