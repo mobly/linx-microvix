@@ -47,7 +47,9 @@ abstract class AbstractRequestFactory
 
     protected function setPortal()
     {
-        $this->requestXML->addChild('IdPortal', $this->configuration->getIdPortal());
+        if ($this->configuration->getIdPortal()) {
+            $this->requestXML->addChild('IdPortal', $this->configuration->getIdPortal());
+        }
     }
 
     /**
