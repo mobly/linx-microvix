@@ -21,6 +21,7 @@ class Reader
         'LinxClientesFornec' => 'Mobly\LinxMicrovix\Reader\Factories\CustomerFactory',
         'LinxPedidosVenda' => 'Mobly\LinxMicrovix\Reader\Factories\GetOrdersFactory',
         'LinxProdutos' => 'Mobly\LinxMicrovix\Reader\Factories\ProductFactory',
+        'LinxCadastraProdutosTempoReal' => 'Mobly\LinxMicrovix\Reader\Factories\CreateProductFactory',
     ];
 
     /**
@@ -52,8 +53,8 @@ class Reader
     }
 
     /**
-     * @param Configuration $configuration
-     * @return Writer
+     * @param $configuration
+     * @return $this
      */
     public function setConfiguration($configuration)
     {
@@ -65,7 +66,7 @@ class Reader
      * @param $command
      * @param array $customFilters
      * @return Response
-     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function get($command, $customFilters = [])
     {
